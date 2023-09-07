@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +30,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         checkAndRequestPermissions()
-
+        binding.btnStart.setOnClickListener {
+            binding.flScreenIntro.manageVisibility(false)
+            binding.flScreenQ1.manageVisibility(true)
+            binding.flScreenQ2.manageVisibility(false)
+            binding.flScreenQ3.manageVisibility(false)
+            binding.flResult.manageVisibility(false)
+        }
+        binding.btnNextQ1.setOnClickListener {
+            binding.flScreenIntro.manageVisibility(false)
+            binding.flScreenQ1.manageVisibility(false)
+            binding.flScreenQ2.manageVisibility(true)
+            binding.flScreenQ3.manageVisibility(false)
+            binding.flResult.manageVisibility(false)
+        }
+        binding.btnNextQ2.setOnClickListener {
+            binding.flScreenIntro.manageVisibility(false)
+            binding.flScreenQ1.manageVisibility(false)
+            binding.flScreenQ2.manageVisibility(false)
+            binding.flScreenQ3.manageVisibility(true)
+            binding.flResult.manageVisibility(false)
+        }
+        binding.btnFinish.setOnClickListener {
+            binding.flScreenIntro.manageVisibility(false)
+            binding.flScreenQ1.manageVisibility(false)
+            binding.flScreenQ2.manageVisibility(false)
+            binding.flScreenQ3.manageVisibility(false)
+            binding.flResult.manageVisibility(true)
+        }
+        binding.btnExit.setOnClickListener {
+            finish()
+        }
+/*
         binding.btnPlay.apply {
             var isPlaying = true
             setOnClickListener {
@@ -67,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 partNumber,
                 questionPrompt
             )
-        }
+        }*/
 
         viewModel.speechResult.observe(this) {
             Log.d(TAG, "speechSuper: ${it.body()?.mapTo()}")
@@ -188,6 +220,10 @@ class MainActivity : AppCompatActivity() {
         permissionGranted = true
     }
 
+    private fun View.manageVisibility(visible:Boolean){
+       if(visible) this.visibility = View.VISIBLE
+        else this.visibility = View.GONE
+    }
 
     companion object {
         private const val TAG = "SPEECH_SUPER"

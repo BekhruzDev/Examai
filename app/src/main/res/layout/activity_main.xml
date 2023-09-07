@@ -3,47 +3,443 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center"
-    android:layout_margin="16dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/llBtns"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnRecord"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Start Recording"
-            android:layout_margin="16dp"
-            android:layout_gravity="center"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnPlay"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Start Playing"
-            android:layout_margin="16dp"
-            android:layout_gravity="center"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCheck"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Evaluate recording"
-            android:layout_margin="16dp"
-            android:layout_gravity="center"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    <TextView
-        android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="22sp"
-        android:visibility="gone"/>
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/flScreenIntro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/screenIntro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:lineHeight="45dp"
+                    android:text="IELTS SPEAKING TEST"
+                    android:textColor="@color/charcoal"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:text="Instructions:"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/changa_regular"
+                    android:gravity="center"
+                    android:text="Welcome to the AI-based IELTS Speaking Demo Test. Below there is a button START TEST, and once you click on it, you will be given 3 questions which you must answer. Ready!, Steady!, Go! "
+                    android:textColor="@color/charcoal"
+                    android:textSize="20sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStart"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_green"
+                android:text="START TEST"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flScreenQ1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/screenQ1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:lineHeight="45dp"
+                    android:text="IELTS SPEAKING TEST"
+                    android:textColor="@color/charcoal"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/changa_bold"
+                    android:gravity="end"
+                    android:text="Recording"
+                    android:textColor="@color/green_light_900"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:text="Part 1 \nQuestion 1:"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/changa_regular"
+                    android:gravity="center"
+                    android:text="Let’s talk about your hometown. Where is your hometown?"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNextQ1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_green"
+                android:text="Next question"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flScreenQ2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/screenQ2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:lineHeight="45dp"
+                    android:text="IELTS SPEAKING TEST"
+                    android:textColor="@color/charcoal"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/changa_bold"
+                    android:gravity="end"
+                    android:text="Recording"
+                    android:textColor="@color/green_light_900"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:text="Part 1 \nQuestion 2:"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/changa_regular"
+                    android:gravity="center"
+                    android:text="Tell me what \nyou like about it"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNextQ2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_green"
+                android:text="Next question"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flScreenQ3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/screenQ3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:lineHeight="45dp"
+                    android:text="IELTS SPEAKING TEST"
+                    android:textColor="@color/charcoal"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/changa_bold"
+                    android:gravity="end"
+                    android:text="Recording"
+                    android:textColor="@color/green_light_900"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:text="Part 1 \nQuestion 3:"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/changa_regular"
+                    android:gravity="center"
+                    android:text="Can you also tell about what you don't like about it?"
+                    android:textColor="@color/charcoal"
+                    android:textSize="30sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFinish"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="30dp"
+                android:background="@drawable/bg_green"
+                android:text="Finish"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <FrameLayout
+                android:id="@+id/flResult"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/changa_medium"
+                        android:gravity="center"
+                        android:lineHeight="45dp"
+                        android:text="IELTS SPEAKING TEST"
+                        android:textColor="@color/charcoal"
+                        android:textSize="40sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/changa_regular"
+                        android:gravity="center"
+                        android:lineHeight="32dp"
+                        android:text="Demo test is finished \nHere is your result:"
+                        android:textColor="@color/charcoal"
+                        android:textSize="25sp" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvSpeed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/changa_bold"
+                            android:gravity="start"
+                            android:text="Speaking speed: 65 wpm"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tvGrammar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:text="Grammatical accuracy: 53%"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tvPronunciation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:text="Pronunciation: 65 %"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tvLexicalRes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:text="Lexical resource: 65%"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tvRelevance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:text="Relevance: 65 %"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tvFluency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:text="Fluency: 75%"
+                            android:textColor="@color/charcoal"
+                            android:textSize="25sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <TextView
+                        android:id="@+id/tvOverall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/changa_bold"
+                        android:gravity="center"
+                        android:text="Overall band score: 7.0"
+                        android:textColor="@color/charcoal"
+                        android:textSize="30sp" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnExit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="30dp"
+                    android:background="@drawable/bg_green"
+                    android:text="Exit"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+            </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </LinearLayout>

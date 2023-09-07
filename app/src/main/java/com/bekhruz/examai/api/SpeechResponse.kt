@@ -27,7 +27,8 @@ data class SpeechResponse(
         vocabulary = result?.vocabulary?.toString()?:"Couldn't analyze",
         topicDevelopment = result?.topicDevelopment?.toString()?:"Couldn't analyze",
         relevance = result?.relevance?.toString()?:"Couldn't analyze",
-        fluency = result?.fluency?.toString()?:"Couldn't analyze"
+        fluency = result?.fluency?.toString()?:"Couldn't analyze",
+        overAll = result?.overall?.toString()?:"Couldn't analyze"
     )
 }
 
@@ -40,6 +41,7 @@ data class Speech(
     val topicDevelopment: String = "",
     val relevance: String = "",
     val fluency: String = "",
+    val overAll: String = ""
 )
 
 data class Params(
