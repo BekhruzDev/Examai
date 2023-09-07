@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomOutlinedHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">25sp</item> <!-- Adjust the text size as needed -->
+    </style>
+</resources>
