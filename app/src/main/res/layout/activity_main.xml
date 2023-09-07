@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -109,7 +108,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/changa_bold"
                     android:gravity="end"
-                    android:text="Recording"
+                    android:text="Recording..."
                     android:textColor="@color/green_light_900"
                     android:textSize="20sp" />
 
@@ -183,7 +182,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/changa_bold"
                     android:gravity="end"
-                    android:text="Recording"
+                    android:text="Recording..."
                     android:textColor="@color/green_light_900"
                     android:textSize="20sp" />
 
@@ -257,7 +256,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/changa_bold"
                     android:gravity="end"
-                    android:text="Recording"
+                    android:text="Recording..."
                     android:textColor="@color/green_light_900"
                     android:textSize="20sp" />
 
@@ -356,9 +355,9 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/changa_bold"
                             android:gravity="start"
-                            android:text="Speaking speed: 65 wpm"
+                            tools:text="Speaking speed: 65 wpm"
                             android:textColor="@color/charcoal"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvGrammar"
@@ -366,9 +365,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/changa_bold"
-                            android:text="Grammatical accuracy: 53%"
+                            tools:text="Grammatical accuracy: 53%"
                             android:textColor="@color/charcoal"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvPronunciation"
@@ -376,9 +375,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/changa_bold"
-                            android:text="Pronunciation: 65 %"
+                            tools:text="Pronunciation: 65 %"
                             android:textColor="@color/charcoal"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvLexicalRes"
@@ -386,9 +385,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/changa_bold"
-                            android:text="Lexical resource: 65%"
+                            tools:text="Lexical resource: 65%"
                             android:textColor="@color/charcoal"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvRelevance"
@@ -396,9 +395,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/changa_bold"
-                            android:text="Relevance: 65 %"
+                            tools:text="Relevance: 65 %"
                             android:textColor="@color/charcoal"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/tvFluency"
@@ -406,22 +405,20 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/changa_bold"
-                            android:text="Fluency: 75%"
+                            tools:text="Fluency: 75%"
+                            android:textColor="@color/charcoal"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:id="@+id/tvOverall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/changa_bold"
+                            android:gravity="center"
+                            tools:text="Overall band score: 7.0"
                             android:textColor="@color/charcoal"
                             android:textSize="25sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <TextView
-                        android:id="@+id/tvOverall"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/changa_bold"
-                        android:gravity="center"
-                        android:text="Overall band score: 7.0"
-                        android:textColor="@color/charcoal"
-                        android:textSize="30sp" />
-
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -439,7 +436,17 @@
             </FrameLayout>
         </androidx.core.widget.NestedScrollView>
 
-
     </androidx.appcompat.widget.LinearLayoutCompat>
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="10dp"
+        android:progress="60"
+        android:indeterminate="true"/>
 
-</LinearLayout>
+
+</FrameLayout>

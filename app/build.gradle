@@ -71,6 +71,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.7.2"  // Check for the latest version
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'  // Replace 4.9.1 with the latest version if available
     implementation 'com.google.code.gson:gson:2.10.1' // Use the appropriate version
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
 
 
 

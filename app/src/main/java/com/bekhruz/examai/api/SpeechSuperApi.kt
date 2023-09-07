@@ -13,5 +13,5 @@ interface SpeechSuperApi {
         @Header("Request-Index") requestIndex: Int,
         @Part("text") comment: RequestBody,
         @Part audio: MultipartBody.Part
-    ): Response<SpeechResponse>
+    ): SpeechResponse
 }

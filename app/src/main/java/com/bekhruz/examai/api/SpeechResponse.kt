@@ -21,27 +21,27 @@ data class SpeechResponse(
     val result: Result?
 ) {
     fun mapTo() = Speech(
-        speed = result?.speed?.toString()?:"Couldn't analyze",
-        grammar = result?.grammar?.toString()?:"Couldn't analyze",
-        pronunciation = result?.pronunciation?.toString()?:"Couldn't analyze",
-        vocabulary = result?.vocabulary?.toString()?:"Couldn't analyze",
-        topicDevelopment = result?.topicDevelopment?.toString()?:"Couldn't analyze",
-        relevance = result?.relevance?.toString()?:"Couldn't analyze",
-        fluency = result?.fluency?.toString()?:"Couldn't analyze",
-        overAll = result?.overall?.toString()?:"Couldn't analyze"
+        speed = result?.speed?:0,
+        grammar = result?.grammar?:0,
+        pronunciation = result?.pronunciation?:0,
+        vocabulary = result?.vocabulary?:0,
+        topicDevelopment = result?.topicDevelopment?:0,
+        relevance = result?.relevance?:0,
+        fluency = result?.fluency?:0,
+        overAll = result?.overall?:0
     )
 }
 
 data class Speech(
     //speed, grammar, pronunciation, vocabulary, topicDevelopment, relevance, fluency
-    val speed: String = "",
-    val grammar: String = "",
-    val pronunciation: String = "",
-    val vocabulary: String = "",
-    val topicDevelopment: String = "",
-    val relevance: String = "",
-    val fluency: String = "",
-    val overAll: String = ""
+    val speed: Int = 0,
+    val grammar: Int = 0,
+    val pronunciation: Int = 0,
+    val vocabulary: Int = 0,
+    val topicDevelopment: Int = 0,
+    val relevance: Int = 0,
+    val fluency: Int = 0,
+    val overAll: Int = 0
 )
 
 data class Params(

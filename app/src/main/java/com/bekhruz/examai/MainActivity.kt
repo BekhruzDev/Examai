@@ -12,15 +12,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.bekhruz.examai.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var mediaRecorder: MediaRecorder? = null
-    private var mediaPlayer: MediaPlayer? = null
     private var filePath: String = ""
     private var permissionGranted = false
     private val viewModel: ExamaiViewModel by viewModels()
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkAndRequestPermissions()
         binding.btnStart.setOnClickListener {
+            startRecording()
             binding.flScreenIntro.manageVisibility(false)
             binding.flScreenQ1.manageVisibility(true)
             binding.flScreenQ2.manageVisibility(false)
@@ -38,72 +41,96 @@ class MainActivity : AppCompatActivity() {
             binding.flResult.manageVisibility(false)
         }
         binding.btnNextQ1.setOnClickListener {
-            binding.flScreenIntro.manageVisibility(false)
-            binding.flScreenQ1.manageVisibility(false)
-            binding.flScreenQ2.manageVisibility(true)
-            binding.flScreenQ3.manageVisibility(false)
-            binding.flResult.manageVisibility(false)
+            lifecycleScope.launch {
+                stopRecording()
+                sendForReview(
+                    prompt = "Let’s talk about your hometown. Where is your hometown?",
+                    questionNo = 1
+                )
+                delay(2000)
+                viewModel.isLoading.postValue(false)
+                startRecording()
+                binding.flScreenIntro.manageVisibility(false)
+                binding.flScreenQ1.manageVisibility(false)
+                binding.flScreenQ2.manageVisibility(true)
+                binding.flScreenQ3.manageVisibility(false)
+                binding.flResult.manageVisibility(false)
+            }
+
         }
         binding.btnNextQ2.setOnClickListener {
-            binding.flScreenIntro.manageVisibility(false)
-            binding.flScreenQ1.manageVisibility(false)
-            binding.flScreenQ2.manageVisibility(false)
-            binding.flScreenQ3.manageVisibility(true)
-            binding.flResult.manageVisibility(false)
+            lifecycleScope.launch {
+                stopRecording()
+                sendForReview(
+                    prompt = "Tell me what you like about it",
+                    questionNo = 2
+                )
+                delay(2000)
+                viewModel.isLoading.postValue(false)
+                startRecording()
+                binding.flScreenIntro.manageVisibility(false)
+                binding.flScreenQ1.manageVisibility(false)
+                binding.flScreenQ2.manageVisibility(false)
+                binding.flScreenQ3.manageVisibility(true)
+                binding.flResult.manageVisibility(false)
+            }
+
         }
         binding.btnFinish.setOnClickListener {
-            binding.flScreenIntro.manageVisibility(false)
-            binding.flScreenQ1.manageVisibility(false)
-            binding.flScreenQ2.manageVisibility(false)
-            binding.flScreenQ3.manageVisibility(false)
-            binding.flResult.manageVisibility(true)
+            lifecycleScope.launch {
+                stopRecording()
+                sendForReview(
+                    prompt = "Can you also tell about what you don't like about it?",
+                    questionNo = 3
+                )
+                delay(3000)
+                binding.flScreenIntro.manageVisibility(false)
+                binding.flScreenQ1.manageVisibility(false)
+                binding.flScreenQ2.manageVisibility(false)
+                binding.flScreenQ3.manageVisibility(false)
+                binding.flResult.manageVisibility(true)
+            }
         }
         binding.btnExit.setOnClickListener {
             finish()
         }
-/*
-        binding.btnPlay.apply {
-            var isPlaying = true
-            setOnClickListener {
-                text = if (isPlaying) "Stop Playing" else "Start Playing"
-                onPlay(isPlaying)
-                isPlaying = !isPlaying
-            }
-        }
-        binding.btnRecord.apply {
-            var isRecording = true
-            setOnClickListener {
-                text = if (isRecording) "Stop Recording" else "Start Recording"
-                onRecord(isRecording)
-                isRecording = !isRecording
-            }
-        }
-        binding.btnCheck.setOnClickListener {
-            val audioPath = "${externalCacheDir?.absolutePath}/audio.amr"
-            val audioType = "amr"
-            val audioSampleRate = "16000"
-            val refText = "audio"
-            val coreType = "speak.eval.pro"
-            val testType = "ielts"
-            val partNumber = 1
-            val questionPrompt = "Where do you live"
-
-            // Call the httpAPI function
-            viewModel.httpAPI(
-                audioPath,
-                audioType,
-                audioSampleRate,
-                refText,
-                coreType,
-                testType,
-                partNumber,
-                questionPrompt
-            )
-        }*/
 
         viewModel.speechResult.observe(this) {
-            Log.d(TAG, "speechSuper: ${it.body()?.mapTo()}")
+            binding.tvFluency.text = getString(R.string.fluency, it.fluency.toActualResult())
+            binding.tvGrammar.text = getString(R.string.grammar, it.grammar.toActualResult())
+            binding.tvPronunciation.text = getString(R.string.pronunciation, it.pronunciation.toActualResult())
+            binding.tvRelevance.text = getString(R.string.relevance, it.relevance.toActualResult())
+            binding.tvSpeed.text = getString(R.string.speakingSpeed, it.speed.toActualResult())
+            binding.tvLexicalRes.text = getString(R.string.lexicalResource, it.vocabulary.toActualResult())
+            binding.tvOverall.text = getString(R.string.overAll, it.overAll.toOverAllBand())
+            viewModel.isLoading.postValue(false)
         }
+        viewModel.isLoading.observe(this) {
+            binding.progress.manageVisibility(it)
+        }
+    }
+
+    private fun sendForReview(prompt: String, questionNo: Int = 1) {
+        val audioPath = "${externalCacheDir?.absolutePath}/audio.amr"
+        val audioType = "amr"
+        val audioSampleRate = "16000"
+        val refText = "audio"
+        val coreType = "speak.eval.pro"
+        val testType = "ielts"
+        val partNumber = 1
+
+        // Call the httpAPI function
+        viewModel.httpAPI(
+            audioPath,
+            audioType,
+            audioSampleRate,
+            refText,
+            coreType,
+            testType,
+            partNumber,
+            prompt,
+            questionNo
+        )
     }
 
     private fun onRecord(recording: Boolean) {
@@ -131,29 +158,6 @@ class MainActivity : AppCompatActivity() {
             start()
         }
     }
-
-    private fun onPlay(playing: Boolean) {
-        if (playing) startPlaying()
-        else stopPlaying()
-    }
-
-    private fun stopPlaying() {
-        mediaPlayer?.release()
-        mediaPlayer = null
-    }
-
-    private fun startPlaying() {
-        mediaPlayer = MediaPlayer().apply {
-            try {
-                setDataSource(filePath)
-                prepare()
-                start()
-            } catch (e: IOException) {
-                Log.e(TAG, "prepare() failed")
-            }
-        }
-    }
-
 
     private fun checkAndRequestPermissions() {
         val readPermission = ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE)
@@ -220,9 +224,17 @@ class MainActivity : AppCompatActivity() {
         permissionGranted = true
     }
 
-    private fun View.manageVisibility(visible:Boolean){
-       if(visible) this.visibility = View.VISIBLE
+    private fun View.manageVisibility(visible: Boolean) {
+        if (visible) this.visibility = View.VISIBLE
         else this.visibility = View.GONE
+    }
+
+    private fun Int.toOverAllBand():Int{
+        return (this * 9) / 100
+    }
+
+    private fun Int.toActualResult():Int{
+        return this - 20
     }
 
     companion object {

@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Examai</string>
+    <string name="app_name">Examy</string>
+    <string name="fluency">Fluency: %d/100</string>
+    <string name="speakingSpeed">Speaking speed: %d wpm</string>
+    <string name="grammar">Grammatical accuracy: %d/100</string>
+    <string name="pronunciation">Pronunciation: %d/100</string>
+    <string name="lexicalResource">Lexical resource: %d/100</string>
+    <string name="relevance">Relevance: %d/100</string>
+    <string name="overAll">Overall Band Score: %d</string>
+
 </resources>

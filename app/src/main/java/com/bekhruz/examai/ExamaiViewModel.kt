@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bekhruz.examai.api.ApiClient
+import com.bekhruz.examai.api.Speech
 import com.bekhruz.examai.api.SpeechResponse
+import com.bekhruz.examai.api.SpeechSuperApi
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.codec.binary.Hex
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.codec.digest.DigestUtils
 import com.google.gson.Gson
@@ -22,10 +24,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExamaiViewModel @Inject constructor(
-    //api
+    private val speechSuperApi: SpeechSuperApi
 ) : ViewModel() {
-    private val apiService = ApiClient.retrofit
-    val speechResult = MutableLiveData<Response<SpeechResponse>>()
+    val map = mutableMapOf<Int, Speech>()
+    val speechResult = MutableLiveData<Speech>()
+    val isLoading = MutableLiveData<Boolean>()
     fun httpAPI(
         audioPath: String,
         audioType: String,
@@ -34,9 +37,11 @@ class ExamaiViewModel @Inject constructor(
         coreType: String,
         testType: String,
         partNumber: Int,
-        questionPrompt: String
+        questionPrompt: String,
+        questionNo: Int
     ) = viewModelScope.launch {
         // Build the params using the modified buildParam() function
+        isLoading.postValue(true)
         val appKey = "16919766530001bc"
         val secretKey = "0f00c91fd4b12fc76a19190541fd2d2e"
         val userId = getRandomString(5)
@@ -56,9 +61,13 @@ class ExamaiViewModel @Inject constructor(
         val audio = MultipartBody.Part.createFormData(
             "audio", audioPath, audioFile.asRequestBody(audioType.toMediaTypeOrNull())
         )
-        val result = apiService.httpAPI(coreType, 0, comment, audio)
-        speechResult.postValue(result)
+        val result = speechSuperApi.httpAPI(coreType, 0, comment, audio)
+        map[questionNo] = result.mapTo()
+        if (questionNo == 3) {
+            speechResult.postValue(map.values.toList().mapToOverAll())
+        }
     }
+
     fun buildParam(
         appkey: String,
         secretKey: String,
@@ -149,5 +158,16 @@ class ExamaiViewModel @Inject constructor(
             .joinToString("")
     }
 
+
+    fun List<Speech>.mapToOverAll() = Speech(
+        speed = this.sumOf { it.speed } / 3,
+        grammar = this.sumOf { it.grammar } / 3,
+        pronunciation = this.sumOf { it.pronunciation } / 3,
+        vocabulary = this.sumOf { it.vocabulary } / 3,
+        topicDevelopment = this.sumOf { it.topicDevelopment } / 3,
+        relevance = this.sumOf { it.relevance } / 3,
+        fluency = this.sumOf { it.fluency } / 3,
+        overAll = this.sumOf { it.overAll } / 3
+    )
 
 }
