@@ -35,7 +35,7 @@
                     android:fontFamily="@font/changa_medium"
                     android:gravity="center"
                     android:lineHeight="45dp"
-                    android:text="IELTS SPEAKING TEST"
+                    android:text="@string/ielts_speaking_test"
                     android:textColor="@color/charcoal"
                     android:textSize="40sp" />
 
@@ -98,7 +98,7 @@
                     android:fontFamily="@font/changa_medium"
                     android:gravity="center"
                     android:lineHeight="45dp"
-                    android:text="IELTS SPEAKING TEST"
+                    android:text="@string/ielts_speaking_test"
                     android:textColor="@color/charcoal"
                     android:textSize="40sp" />
 
@@ -172,7 +172,7 @@
                     android:fontFamily="@font/changa_medium"
                     android:gravity="center"
                     android:lineHeight="45dp"
-                    android:text="IELTS SPEAKING TEST"
+                    android:text="@string/ielts_speaking_test"
                     android:textColor="@color/charcoal"
                     android:textSize="40sp" />
 
@@ -246,7 +246,7 @@
                     android:fontFamily="@font/changa_medium"
                     android:gravity="center"
                     android:lineHeight="45dp"
-                    android:text="IELTS SPEAKING TEST"
+                    android:text="@string/ielts_speaking_test"
                     android:textColor="@color/charcoal"
                     android:textSize="40sp" />
 
@@ -325,7 +325,7 @@
                         android:fontFamily="@font/changa_medium"
                         android:gravity="center"
                         android:lineHeight="45dp"
-                        android:text="IELTS SPEAKING TEST"
+                        android:text="@string/ielts_speaking_test"
                         android:textColor="@color/charcoal"
                         android:textSize="40sp" />
 

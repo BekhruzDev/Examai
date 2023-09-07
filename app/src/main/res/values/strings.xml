@@ -7,5 +7,6 @@
     <string name="lexicalResource">Lexical resource: %d/100</string>
     <string name="relevance">Relevance: %d/100</string>
     <string name="overAll">Overall Band Score: %d</string>
+    <string name="ielts_speaking_test">IELTS SPEAKING AI TEST</string>
 
 </resources>

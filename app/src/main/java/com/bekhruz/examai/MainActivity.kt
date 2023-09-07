@@ -234,7 +234,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun Int.toActualResult():Int{
-        return this - 20
+        return if(this>=20)this - 20 else this
     }
 
     companion object {
