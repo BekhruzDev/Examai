@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.speechResult.observe(this) {
-            Log.d(TAG, "speechSuper: ${it.body()}")
+            Log.d(TAG, "speechSuper: ${it.body()?.mapTo()}")
         }
     }
 

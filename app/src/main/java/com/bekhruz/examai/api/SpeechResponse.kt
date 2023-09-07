@@ -18,7 +18,28 @@ data class SpeechResponse(
     @SerializedName("params")
     val params: Params,
     @SerializedName("result")
-    val result: Result
+    val result: Result?
+) {
+    fun mapTo() = Speech(
+        speed = result?.speed?.toString()?:"Couldn't analyze",
+        grammar = result?.grammar?.toString()?:"Couldn't analyze",
+        pronunciation = result?.pronunciation?.toString()?:"Couldn't analyze",
+        vocabulary = result?.vocabulary?.toString()?:"Couldn't analyze",
+        topicDevelopment = result?.topicDevelopment?.toString()?:"Couldn't analyze",
+        relevance = result?.relevance?.toString()?:"Couldn't analyze",
+        fluency = result?.fluency?.toString()?:"Couldn't analyze"
+    )
+}
+
+data class Speech(
+    //speed, grammar, pronunciation, vocabulary, topicDevelopment, relevance, fluency
+    val speed: String = "",
+    val grammar: String = "",
+    val pronunciation: String = "",
+    val vocabulary: String = "",
+    val topicDevelopment: String = "",
+    val relevance: String = "",
+    val fluency: String = "",
 )
 
 data class Params(
@@ -63,7 +84,7 @@ data class App(
 
 data class Result(
     @SerializedName("speed")
-    val speed: Int,
+    val speed: Int?,
     @SerializedName("kernel_version")
     val kernelVersion: String,
     @SerializedName("resource_version")
@@ -73,23 +94,23 @@ data class Result(
     @SerializedName("sentences")
     val sentences: List<Sentence>,
     @SerializedName("grammar")
-    val grammar: Int,
+    val grammar: Int?,
     @SerializedName("transcription")
     val transcription: String,
     @SerializedName("pronunciation")
-    val pronunciation: Int,
+    val pronunciation: Int?,
     @SerializedName("pause_filler")
     val pauseFiller: Map<String, Any>, // You can specify the correct type here
     @SerializedName("vocabulary")
-    val vocabulary: Int,
+    val vocabulary: Int?,
     @SerializedName("topic_development")
-    val topicDevelopment: Int,
+    val topicDevelopment: Int?,
     @SerializedName("relevance")
-    val relevance: Int,
+    val relevance: Int?,
     @SerializedName("effective_speech_length")
     val effectiveSpeechLength: Double,
     @SerializedName("fluency")
-    val fluency: Int
+    val fluency: Int?
 )
 
 data class Sentence(
@@ -126,6 +147,3 @@ data class Pause(
     @SerializedName("duration")
     val duration: Int
 )
-
-
-//speed, grammar, pronunciation, vocabulary, topicDevelopment, relevance, fluency
