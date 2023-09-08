@@ -19,8 +19,6 @@ class WritingResultActivity : AppCompatActivity() {
         val receivedMessage = intent.getStringExtra("result")
 
         if (receivedMessage != null) {
-            // Do something with the received string
-            // For example, display it in a TextView
             binding.tvResult.text = receivedMessage
         }
         binding.btnToSpeaking.setOnClickListener {
