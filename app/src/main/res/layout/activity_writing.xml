@@ -78,13 +78,13 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="40dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnTakePic"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_blue"
                         android:text="Take a pic"
@@ -96,6 +96,7 @@
                         android:id="@+id/btnUpload"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginStart="16dp"
                         android:background="@drawable/bg_green"
                         android:text="Upload a pic"

@@ -8,9 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.bekhruz.examai.databinding.ActivityWritingBinding
+import com.google.android.gms.common.annotation.KeepName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+@KeepName
 class WritingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWritingBinding
     private val viewModel by viewModels<WritingViewModel>()
@@ -38,6 +40,10 @@ class WritingActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please, provide the essay!", Toast.LENGTH_SHORT).show()
             }
+        }
+        binding.btnTakePic.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
         }
         viewModel.responseLiveData.observe(this) {
             viewModel.isLoading.postValue(false)

@@ -21,7 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val TIME_OUT = 40L
+    private const val TIME_OUT = 50L
     private const val BASE_URL = "https://api.speechsuper.com/"
 
     @Singleton
