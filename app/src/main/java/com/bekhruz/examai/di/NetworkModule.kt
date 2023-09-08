@@ -3,6 +3,7 @@ package com.bekhruz.examai.di
 import android.content.Context
 import androidx.viewbinding.BuildConfig
 import com.bekhruz.examai.api.SpeechSuperApi
+import com.bekhruz.examai.api.WritingApi
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val TIME_OUT = 20L
+    private const val TIME_OUT = 40L
     private const val BASE_URL = "https://api.speechsuper.com/"
 
     @Singleton
@@ -53,4 +54,15 @@ object NetworkModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(SpeechSuperApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideWritingApi(okHttpClient: OkHttpClient): WritingApi {
+        return Retrofit.Builder()
+            .baseUrl("https://simple-chatgpt-api.p.rapidapi.com/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WritingApi::class.java)
+    }
 }

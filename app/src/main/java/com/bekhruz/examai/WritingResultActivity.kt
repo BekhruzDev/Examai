@@ -1,5 +1,6 @@
 package com.bekhruz.examai
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bekhruz.examai.databinding.ActivityWritingResultBinding
@@ -14,6 +15,19 @@ class WritingResultActivity : AppCompatActivity() {
         binding = ActivityWritingResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val intent = intent
+        val receivedMessage = intent.getStringExtra("result")
+
+        if (receivedMessage != null) {
+            // Do something with the received string
+            // For example, display it in a TextView
+            binding.tvResult.text = receivedMessage
+        }
+        binding.btnToSpeaking.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }

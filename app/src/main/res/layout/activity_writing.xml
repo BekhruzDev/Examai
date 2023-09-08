@@ -8,83 +8,126 @@
     android:padding="16dp"
     tools:context=".WritingActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/changa_medium"
-            android:gravity="center"
-            android:lineHeight="45dp"
-            android:text="@string/ielts_writing_test"
-            android:textColor="@color/charcoal"
-            android:textSize="40sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundMode="outline"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="false"
-            app:hintTextAppearance="@style/CustomOutlinedHintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:gravity="top|start"
-                android:textColor="@color/charcoal"
-                android:textColorHint="@color/charcoal"
-                android:background="@color/main_background_secondary"
-                android:hint="Paste your essay"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnTakePic"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:background="@drawable/bg_blue"
-                android:text="Take a pic"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUpload"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:background="@drawable/bg_green"
-                android:text="Upload a pic"
-                android:layout_marginStart="16dp"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEvaluate"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:textAllCaps="false"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_green"
-        android:text="Evaluate"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:fillViewport="true">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:lineHeight="45dp"
+                    android:text="@string/ielts_writing_test"
+                    android:textColor="@color/charcoal"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/changa_medium"
+                    android:gravity="center"
+                    android:text="@string/ielts_writing_task_2"
+                    android:textColor="@color/charcoal"
+                    android:textSize="15sp" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:boxBackgroundMode="outline"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="false"
+                        app:hintTextAppearance="@style/CustomOutlinedHintText">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/main_background_secondary"
+                            android:gravity="top|start"
+                            android:inputType="textMultiLine"
+                            android:scrollbars="vertical"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbarStyle="insideInset"
+                            android:hint="Paste your essay"
+                            android:maxLines="1000"
+                            android:textColor="@color/charcoal"
+                            android:textColorHint="@color/charcoal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnTakePic"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_blue"
+                        android:text="Take a pic"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnUpload"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/bg_green"
+                        android:text="Upload a pic"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEvaluate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginVertical="24dp"
+                    android:background="@drawable/bg_green"
+                    android:text="Evaluate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="16dp"
+                android:indeterminate="true"
+                android:progress="60"
+                android:visibility="gone" />
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 </FrameLayout>
